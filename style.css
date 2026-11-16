@@ -1,0 +1,36 @@
+/* Aspetto da pannello tecnico: testo leggibile e dati evidenziati sullo sfondo scuro. */
+body {
+    font-family: monospace;
+    background: #121212;
+    color: #00ff66;
+    padding: 20px;
+}
+
+/* Ogni riquadro separa una vista diversa dello stesso storico. */
+.box {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+/* La vista JSON puo' contenere molti punti, quindi scorre al suo interno. */
+pre {
+    background: #000;
+    color: #00ff66;
+    padding: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+h2,
+h3 {
+    color: #ffffff;
+}
+
+#mappa {
+    height: 800px;
+    margin-bottom: 20px;
+}
+

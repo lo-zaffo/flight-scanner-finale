@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flight Scanner - Accumulo Dati</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Includi il CSS di Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Includi il JavaScript di Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <!-- Titolo e stato sintetico dell'aggiornamento dei dati. -->
+    <h2>Flight Scanner - Accumulo Posizioni Aerei</h2>
+
+    <!-- Il conto alla rovescia indica quando partira' il prossimo aggiornamento.
+         Il totale conta tutti i rilevamenti accumulati, non solo gli aerei attualmente visibili. -->
+    <div class="box">
+        Prossimo polling tra: <strong><span id="timer"></span>s</strong> |
+        Totale punti nello storico: <strong><span id="totalePunti">0</span></strong>
+    </div>
+
+    <div id="mappa"></div>
+
+    <!-- Vista dettagliata: mostra lo storico completo, raggruppato per identificativo del volo. -->
+    <div class="box">
+        <h3>1. Struttura Dati 'storicoPosizioni' (JSON)</h3>
+        <pre id="outputJSON">{}</pre>
+    </div>
+
+    <!-- Vista riassuntiva: per ogni volo mostra il numero di rilevamenti e l'ultimo punto raccolto. -->
+    <div class="box">
+        <h3>2. Registro Sintetico dei Voli</h3>
+        <div id="logAerei">In attesa dei dati...</div>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+
+</html>
