@@ -84,9 +84,12 @@ def configura_ambiente_rete():
     password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
     password_mgr.add_password(None, f"http://{ip_proxy}:{porta_proxy}", utente, password)
     auth_handler = urllib.request.ProxyBasicAuthHandler(password_mgr)
+    
+    # Gestore SSL senza verifica certificato.
+    https_handler = urllib.request.HTTPSHandler(context=ssl_context)
 
-    # Unisce i due gestori in un opener che verrà usato da tutte le richieste.
-    opener = urllib.request.build_opener(proxy_handler, auth_handler)
+    # Unisce tutti i gestori in un unico opener.
+    opener = urllib.request.build_opener(proxy_handler, auth_handler, https_handler)
     urllib.request.install_opener(opener)
     
     # Messaggio di conferma.
@@ -125,7 +128,7 @@ class CustomProxyHandler(SimpleHTTPRequestHandler):
                 req = urllib.request.Request(API_URL, headers=headers)
                 
                 # Esegue la richiesta inviandola effettivamente, con timeout e con il contesto SSL personalizzato(che disattiva protocollo SSL)
-                with urllib.request.urlopen(req, context=ssl_context, timeout=10) as response:
+                with urllib.request.urlopen(req, timeout=10) as response:
                     # Legge i dati ricevuti.
                     data = response.read()
                     
@@ -183,7 +186,7 @@ class CustomProxyHandler(SimpleHTTPRequestHandler):
 
             req = urllib.request.Request(url_tiles, headers=headers)
 
-            with urllib.request.urlopen(req, context=ssl_context, timeout=12) as response:
+            with urllib.request.urlopen(req, timeout=10) as response:
                 # Legge i dati ricevuti.
                 data = response.read()
                                 
